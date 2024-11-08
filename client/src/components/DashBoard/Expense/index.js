@@ -1,20 +1,21 @@
-import React from 'react';
-import NewExpense from './NewExpense';
-import ExpenseList from './ExpenseList';
+import React from "react";
+import NewExpense from "./NewExpense";
+import ExpenseList from "./ExpenseList";
+import { useSelector } from "react-redux";
+import { selectUserExpenses } from "../../../slice/authSlice";
 
 const Expense = () => {
-    // probably have this in redux so that it can be shared with other components like budget
-    const [expenses, setExpenses] = React.useState([]);
+  const expenses = useSelector(selectUserExpenses);
 
-    return (
-        <div>
-            <NewExpense setExpenses={setExpenses}/>
+  return (
+    <div className="flow-content">
+      <NewExpense />
 
-            <h1>Expense</h1>
+      <h2>Expenses</h2>
 
-            <ExpenseList items={expenses}/>
-        </div>
-    );
-}
+      <ExpenseList items={expenses} />
+    </div>
+  );
+};
 
 export default Expense;

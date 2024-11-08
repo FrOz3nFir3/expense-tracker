@@ -4,16 +4,15 @@ const path = require("path");
 const cors = require("cors");
 const app = express();
 const cookieParser = require("cookie-parser");
-require("dotenv").config({ path: require('find-config')('.env') });
+require("dotenv").config({ path: require("find-config")(".env") });
 const cookieSecret = process.env.COOKIE_SECRET;
-
 
 // needed when developing in development mode
 app.use(
   cors({
-    origin: "http://localhost",
+    origin: ["http://localhost"],
     optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
-  })
+  }),
 );
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));

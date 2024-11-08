@@ -1,43 +1,44 @@
 import React from "react";
-import { Link } from "react-router-dom";
-// import { useGetAuthDetailsQuery } from "../slice/apiSlice";
-// import { selectCurrentUser, initialUser } from "../slice/authSlice";
-// import { useDispatch, useSelector } from "react-redux";
+import { Link, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { initialUser, selectCurrentUser } from "../../slice/authSlice";
+import { useGetAuthDetailsQuery } from "../../slice/apiSlice";
 
 const Header = (props) => {
-//   const { data: existingUser = {}, isSuccess } = useGetAuthDetailsQuery();
-//   const dispatch = useDispatch();
+  const { data: existingUser = {}, isSuccess, error } = useGetAuthDetailsQuery();
+  const dispatch = useDispatch();
 
-//   React.useEffect(() => {
-//       dispatch(initialUser(existingUser));
-//   }, [existingUser]);
+  React.useEffect(() => {
+    dispatch(initialUser(existingUser));
+  }, [existingUser]);
 
-//   const user = useSelector(selectCurrentUser);
+  const user = useSelector(selectCurrentUser);
 
   return (
-    <ul className="header flex">
-      <div>Expense Tracker</div>
-      
-      {/* {isSuccess ? (
+    <ul className="header flex justify-between">
+      <NavLink to="/">Expense Tracker</NavLink>
+
+      {error && <li className="bg-error">{error.data.message}</li>}
+      {isSuccess ? (
         user == null ? (
           <li>
             <Link to="/authenticate">Login / Sign Up</Link>
           </li>
         ) : (
-          <>
+          <div className="flex">
             <li>
-              <Link to={"/profile"}>Profile</Link>
+              <Link to={"/dashboard"}>DashBoard</Link>
             </li>
             <li>
               <Link to="/logout">Logout</Link>
             </li>
-          </>
+          </div>
         )
       ) : (
-        <li>loading..</li>
-      )} */}
+        <li>loading...</li>
+      )}
     </ul>
   );
-}
+};
 
 export default Header;
