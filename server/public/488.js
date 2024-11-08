@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkfrontend=self.webpackChunkfrontend||[]).push([[488],{488:(e,t,n)=>{n.r(t),n.d(t,{default:()=>c});var a=n(471),r=n(183);const c=()=>a.createElement("div",{className:"container"},"Cannot Find the page Return to the ",a.createElement(r.k2,{to:"/"},"Home Page"))}}]);
