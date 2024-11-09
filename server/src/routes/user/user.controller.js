@@ -43,9 +43,11 @@ async function httpCreateNewUser(req, res) {
     const user = await createNewUser(newUser);
     sendCookie(res, user._id);
 
-    delete user.password;
-    delete user._id;
-    delete user.__v;
+    // can use rest operator as well
+    delete user._doc.password;
+    delete user._doc._id;
+    delete user._doc.__v;
+   
     res.status(200).json({ user });
   } catch (error) {
     console.log(error);
@@ -68,9 +70,10 @@ async function httpLoginUser(req, res) {
 
     sendCookie(res, user._id);
 
-    // can probably use spread operator as well
-    delete user._id;
-    delete user.password;
+    // can use rest operator as well
+    delete user._doc.password;
+    delete user._doc._id;
+    delete user._doc.__v;
     return res.status(200).json({ user });
   } catch (error) {
     return res.status(500).json({ error: error.message });
